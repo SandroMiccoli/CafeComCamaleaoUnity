@@ -157,6 +157,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.SandroMiccoli.CafeComCamaleao
+    Standalone: com.SandroMiccoli.CafeComCamaleao
     iPhone: com.SandroMiccoli.CafeComCamaleao
   buildNumber:
     Standalone: 0
