@@ -149,7 +149,7 @@ Material:
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
     - _EnvironmentReflections: 1
-    - _Exposure: 0.31
+    - _Exposure: 0.17
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
