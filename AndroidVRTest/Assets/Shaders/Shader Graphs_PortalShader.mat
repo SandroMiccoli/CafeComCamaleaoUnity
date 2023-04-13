@@ -54,14 +54,14 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _DissolveAmount: 1.7
+    - _DissolveAmount: -0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 2.5
-    - _Speed: 0.5
-    - _TwirlStrength: 28
+    - _Scale: 2.46
+    - _Speed: 0.6
+    - _TwirlStrength: 53.45
     m_Colors:
-    - _Color: {r: 108.66901, g: 2.2757885, b: 19.494766, a: 1}
+    - _Color: {r: 0.2938043, g: 0.4594738, b: 1.3686981, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6618243170454695666
 MonoBehaviour:
