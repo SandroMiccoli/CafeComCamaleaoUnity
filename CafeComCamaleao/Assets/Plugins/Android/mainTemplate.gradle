@@ -9,8 +9,8 @@ dependencies {
 **DEPS**}
 
 android {
-    compileSdkVersion '**APIVERSION**'
-    buildToolsVersion ''**BUILDTOOLS**''
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
