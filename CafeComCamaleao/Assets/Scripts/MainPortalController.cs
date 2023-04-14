@@ -45,11 +45,12 @@ public class MainPortalController : MonoBehaviour
 
     private GameObject _portalFX;
     private GameObject _portalParticle;
+    private GameObject _portalSoundFX;
 
     private IEnumerator _cr_portalFxOpen, _cr_portalFxClose;
 
-    private float _portalDissolveMin=0.15f;
-    private float _portalDissolveMax=4f;
+    private float _portalDissolveMin=-0.72f;
+    private float _portalDissolveMax=3f;
 
     /// <summary>
     /// Start is called before the first frame update.
@@ -60,6 +61,7 @@ public class MainPortalController : MonoBehaviour
         _myVideoPlayer = GetComponent<VideoPlayer>();
         _portalFX = this.gameObject.transform.GetChild(0).gameObject;
         _portalParticle = this.gameObject.transform.GetChild(1).gameObject;
+        _portalSoundFX = this.gameObject.transform.GetChild(2).gameObject;
         _portalParticle.SetActive(false);
         
         _myVideoPlayer.Pause();
@@ -89,6 +91,8 @@ public class MainPortalController : MonoBehaviour
     public void OnPointerEnter()
     {
         SetFocusedPortal(true);
+        _portalSoundFX.GetComponent<AudioSource>().Play(0);
+        
     }
 
     /// <summary>
@@ -97,6 +101,7 @@ public class MainPortalController : MonoBehaviour
     public void OnPointerExit()
     {
         SetFocusedPortal(false);
+        _portalSoundFX.GetComponent<AudioSource>().Pause();
     }
 
     /// <summary>
@@ -174,9 +179,6 @@ public class MainPortalController : MonoBehaviour
         _myVideoPlayer.Play();
         transform.position = new Vector3(0f,0f,0f);
         transform.localScale = _maxScale;
-
-        if(_nextPortal)
-            StartCoroutine(_nextPortal.GetComponent<MainPortalController>().WaitToSpawnPortal());
     }
 
     /// <summary>
