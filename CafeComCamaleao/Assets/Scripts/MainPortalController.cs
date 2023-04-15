@@ -17,6 +17,7 @@
 //-----------------------------------------------------------------------
 
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -29,8 +30,9 @@ public class MainPortalController : MonoBehaviour
     public float _timeToSpawn = 5.0f;
     public Vector3 _initialScale = new Vector3(18f,18f,18f);
     public GameObject _mainPortal;
-    public GameObject _nextPortal;
     public bool _autoStart=false;
+
+    public string _videoFileName;
 
     public Vector3 _maxScale = new Vector3(-100f,-100f,-100f);
 
@@ -53,6 +55,9 @@ public class MainPortalController : MonoBehaviour
     private float _portalDissolveMin=-0.72f;
     private float _portalDissolveMax=3f;
 
+    private bool _spawned = false;
+    private bool _open = false;
+
     /// <summary>
     /// Start is called before the first frame update.
     /// </summary>
@@ -65,6 +70,7 @@ public class MainPortalController : MonoBehaviour
         _portalSoundFX = this.gameObject.transform.GetChild(2).gameObject;
         _portalParticle.SetActive(false);
         
+        _myVideoPlayer.url = Path.Combine(Application.streamingAssetsPath, _videoFileName);
         _myVideoPlayer.Pause();
         _myVideoPlayer.loopPointReached += EndReached;
 
@@ -81,6 +87,16 @@ public class MainPortalController : MonoBehaviour
 
 
         // SetFocusedPortal(true);
+    }
+
+    public void Update(){
+        // slowly takes from scale, if 0 then destroy portal
+        if(_spawned && !_open){
+            transform.localScale -= new Vector3(-0.0075f,-0.0075f,-0.0075f);
+            if(transform.localScale.x>0){
+                Destroy(gameObject);
+            }
+        }
     }
 
     void EndReached(UnityEngine.Video.VideoPlayer vp)
@@ -123,7 +139,7 @@ public class MainPortalController : MonoBehaviour
     /// <summary>
     /// This method spawns the Portal scale
     /// </summary>
-    private IEnumerator SpawnPortal()
+    public IEnumerator SpawnPortal()
     {
         _portalParticle.SetActive(true);
         float timeElapsed = 0;
@@ -137,6 +153,7 @@ public class MainPortalController : MonoBehaviour
             yield return null;
         }
         transform.localScale = _initialScale;
+        _spawned = true;
     }
 
     /// <summary>
@@ -159,33 +176,26 @@ public class MainPortalController : MonoBehaviour
     /// <summary>
 
     // After Open FX finished
-    // kill fxs and open and play ivdoe
+    // kill fxs and open and plays video
     /// This method opens the portal and starts playing the video
     /// </summary>
-
-    // After Open FX finished
-    // kill fxs and open and play ivdoe
     private IEnumerator PortalOpenLerp()
     {
-        print("PortalOpenLerp");
         GameObject tit = GameObject.Find("Título");
         if (tit)
             tit.SetActive(false);
 
         // PAUSE MAIN VIDEO
-        if(_mainPortal){
+        if(_mainPortal!=null){
             _mainPortal.GetComponent<VideoPlayer>().Pause();
         }
-
-        if(_nextPortal)
-            StartCoroutine(_nextPortal.GetComponent<MainPortalController>().WaitToSpawnPortal());
 
         // START THIS PORTAL VIDEO
         _myVideoPlayer.Play();
 
         // LERPS POSITION AND SCALE
         float timeElapsed = 0;
-        float lerpDuration = 3; 
+        float lerpDuration = 5; 
         Vector3 positionToLerp = new Vector3(0f,0f,0f);
         Vector3 scaleToLerp = _maxScale;
         while (timeElapsed < lerpDuration)
@@ -199,6 +209,7 @@ public class MainPortalController : MonoBehaviour
         }
         transform.position = new Vector3(0f,0f,0f);
         transform.localScale = _maxScale;
+        _open=true;
 
     }
 
@@ -207,10 +218,9 @@ public class MainPortalController : MonoBehaviour
     /// </summary>
     private IEnumerator PortalCloseLerp()
     {
-        print("PortalCloseLerp");
-
         // RESUME MAIN VIDEO
-        if(_mainPortal){
+        if(_mainPortal!=null){
+            _mainPortal.GetComponent<VideoPlayer>().frame=(long)(_timeToSpawn+2.5f)*30;
             _mainPortal.GetComponent<VideoPlayer>().Play();
         }
         
@@ -251,6 +261,7 @@ public class MainPortalController : MonoBehaviour
             _portalParticleSystemEmission.enabled = true;
             _portalParticleSystemEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0.0f, emissionRate);
             emissionRate+=emissionRateInc;
+            transform.localScale += new Vector3(-0.005f,-0.005f,-0.005f);
              
             // or for a funky light heavy effect:
             // _portalParticleSystemEmission.rateOverTime = Mathf.Lerp(particleEmissionMin, particleEmissionMax, startOfEmission/ emissionLength);

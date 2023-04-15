@@ -5758,7 +5758,7 @@ PrefabInstance:
     - target: {fileID: 4052175958931371668, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 8.63
+      value: 10.4
       objectReference: {fileID: 0}
     - target: {fileID: 4052175958931371668, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
@@ -5798,12 +5798,12 @@ PrefabInstance:
     - target: {fileID: 4052175958931371668, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.17926908
+      value: 0.81892544
       objectReference: {fileID: 0}
     - target: {fileID: 4052175958931371668, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0
+      value: 0.4575472
       objectReference: {fileID: 0}
     - target: {fileID: 4052175958931371670, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
@@ -7110,7 +7110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1716940545
 Transform:
   m_ObjectHideFlags: 0
