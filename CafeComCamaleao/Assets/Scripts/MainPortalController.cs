@@ -45,6 +45,7 @@ public class MainPortalController : MonoBehaviour
 
     private GameObject _portalFX;
     private GameObject _portalParticle;
+    private ParticleSystem _portalParticleSystem;
     private GameObject _portalSoundFX;
 
     private IEnumerator _cr_portalFxOpen, _cr_portalFxClose;
@@ -71,6 +72,8 @@ public class MainPortalController : MonoBehaviour
 
         _cr_portalFxOpen = PortalFXOpenLerp(0);
         _cr_portalFxClose = PortalFXCloseLerp(0);
+
+        _portalParticleSystem = _portalParticle.GetComponent<ParticleSystem>();
         
 
         if (_autoStart)
@@ -84,6 +87,10 @@ public class MainPortalController : MonoBehaviour
     {
         StartCoroutine(PortalCloseLerp());
     }
+
+    //
+    // INTERACTION
+    //
 
     /// <summary>
     /// This method is called by the Main Camera when it starts gazing at this GameObject.
@@ -105,7 +112,7 @@ public class MainPortalController : MonoBehaviour
     }
 
     /// <summary>
-    /// This method spawns the Portal scale
+    /// This method waits time in seconds before showing the portal
     /// </summary>
     private IEnumerator WaitToSpawnPortal()
     {
@@ -150,19 +157,33 @@ public class MainPortalController : MonoBehaviour
     }
 
     /// <summary>
+
+    // After Open FX finished
+    // kill fxs and open and play ivdoe
     /// This method opens the portal and starts playing the video
     /// </summary>
+
+    // After Open FX finished
+    // kill fxs and open and play ivdoe
     private IEnumerator PortalOpenLerp()
     {
+        print("PortalOpenLerp");
         GameObject tit = GameObject.Find("Título");
         if (tit)
             tit.SetActive(false);
 
-
+        // PAUSE MAIN VIDEO
         if(_mainPortal){
             _mainPortal.GetComponent<VideoPlayer>().Pause();
         }
 
+        if(_nextPortal)
+            StartCoroutine(_nextPortal.GetComponent<MainPortalController>().WaitToSpawnPortal());
+
+        // START THIS PORTAL VIDEO
+        _myVideoPlayer.Play();
+
+        // LERPS POSITION AND SCALE
         float timeElapsed = 0;
         float lerpDuration = 3; 
         Vector3 positionToLerp = new Vector3(0f,0f,0f);
@@ -176,9 +197,9 @@ public class MainPortalController : MonoBehaviour
             transform.localScale = scaleToLerp;
             yield return null;
         }
-        _myVideoPlayer.Play();
         transform.position = new Vector3(0f,0f,0f);
         transform.localScale = _maxScale;
+
     }
 
     /// <summary>
@@ -186,11 +207,14 @@ public class MainPortalController : MonoBehaviour
     /// </summary>
     private IEnumerator PortalCloseLerp()
     {
+        print("PortalCloseLerp");
 
+        // RESUME MAIN VIDEO
         if(_mainPortal){
             _mainPortal.GetComponent<VideoPlayer>().Play();
         }
-
+        
+        // LERPS SCALE
         float timeElapsed = 0;
         float lerpDuration = 1; 
         Vector3 scaleToLerp = _maxScale;
@@ -203,24 +227,39 @@ public class MainPortalController : MonoBehaviour
         }
         transform.localScale = new Vector3(0f,0f,0f);
 
-        if(_nextPortal)
-            StartCoroutine(_nextPortal.GetComponent<MainPortalController>().WaitToSpawnPortal());
-
         Destroy(gameObject);
     }
+
+    //
+    // FX
+    //
 
     private IEnumerator PortalFXOpenLerp(float _t)
     {
         float timeElapsed = _t;
         float lerpDuration = 5; 
+        float emissionRate = 0.0f;
+        float emissionRateInc = 10.0f;
         float valueToLerp;
         while (timeElapsed < lerpDuration)
         {
             valueToLerp = Mathf.Lerp(_portalDissolveMin, _portalDissolveMax, timeElapsed / lerpDuration);
             timeElapsed += Time.deltaTime;
             _portalFX.GetComponent<Renderer>().material.SetFloat("_DissolveAmount",valueToLerp);
+            
+            var _portalParticleSystemEmission = _portalParticleSystem.emission;
+            _portalParticleSystemEmission.enabled = true;
+            _portalParticleSystemEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0.0f, emissionRate);
+            emissionRate+=emissionRateInc;
+             
+            // or for a funky light heavy effect:
+            // _portalParticleSystemEmission.rateOverTime = Mathf.Lerp(particleEmissionMin, particleEmissionMax, startOfEmission/ emissionLength);
+ 
             yield return null;
         }
+
+        // After Open FX finished
+        // kill fxs and open and play ivdoe
         _portalFX.SetActive(false);
         _portalParticle.SetActive(false);
         StartCoroutine(PortalOpenLerp());
