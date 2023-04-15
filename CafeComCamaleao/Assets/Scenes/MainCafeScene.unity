@@ -348,7 +348,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247481534
 GameObject:
@@ -5265,7 +5265,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &389255507
 MonoBehaviour:
@@ -6144,7 +6144,7 @@ Transform:
   m_Children:
   - {fileID: 959308593}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &907292809
 MonoBehaviour:
@@ -6374,7 +6374,7 @@ PrefabInstance:
     - target: {fileID: 4052175959848662203, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4052175959848662203, guid: cc2d4671b0742714d89a7621e551bb71,
         type: 3}
@@ -7030,7 +7030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41913cea5e3a9cc428582a156ee6a8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToSpawn: 217
+  _timeToSpawn: 219
   _initialScale: {x: -15, y: -15, z: -15}
   _mainPortal: {fileID: 1426621529}
   _autoStart: 0
@@ -7068,7 +7068,7 @@ RectTransform:
   - {fileID: 148680883}
   - {fileID: 955127926}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7217,7 +7217,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1455096538
 MonoBehaviour:
@@ -7729,5 +7729,5 @@ Transform:
   - {fileID: 247481535}
   - {fileID: 1716940545}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
