@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_PortalShader_04_Cachoeira_Agua
+  m_Name: Shader Graphs_PortalShader_04_Cachoeira_Agua 1
   m_Shader: {fileID: -6465566751694194690, guid: 51f7e5bcfed3b9a4ebe6a5772c97e8fa,
     type: 3}
   m_ValidKeywords: []

@@ -31,6 +31,7 @@ public class MainPortalController : MonoBehaviour
     public Vector3 _initialScale = new Vector3(18f,18f,18f);
     public GameObject _mainPortal;
     public bool _autoStart=false;
+    public bool _selfDestroy=false;
 
     public string _videoFileName;
 
@@ -58,6 +59,9 @@ public class MainPortalController : MonoBehaviour
     private bool _spawned = false;
     private bool _open = false;
 
+    public void Awake(){
+    }
+
     /// <summary>
     /// Start is called before the first frame update.
     /// </summary>
@@ -71,7 +75,8 @@ public class MainPortalController : MonoBehaviour
         _portalParticle.SetActive(false);
         
         _myVideoPlayer.url = Path.Combine(Application.streamingAssetsPath, _videoFileName);
-        _myVideoPlayer.Pause();
+        _myVideoPlayer.prepareCompleted += VideoPrepared;
+        _myVideoPlayer.Prepare();
         _myVideoPlayer.loopPointReached += EndReached;
 
         transform.localScale = new Vector3(0f,0f,0f);
@@ -91,7 +96,7 @@ public class MainPortalController : MonoBehaviour
 
     public void Update(){
         // slowly takes from scale, if 0 then destroy portal
-        if(_spawned && !_open){
+        if(_spawned && !_open && _selfDestroy){
             transform.localScale -= new Vector3(-0.0075f,-0.0075f,-0.0075f);
             if(transform.localScale.x>0){
                 Destroy(gameObject);
@@ -103,6 +108,12 @@ public class MainPortalController : MonoBehaviour
     {
         StartCoroutine(PortalCloseLerp());
     }
+
+    void VideoPrepared(UnityEngine.Video.VideoPlayer vp) {
+        vp.Play();
+        vp.Pause();
+    }
+
 
     //
     // INTERACTION
@@ -133,6 +144,10 @@ public class MainPortalController : MonoBehaviour
     private IEnumerator WaitToSpawnPortal()
     {
         yield return new WaitForSeconds(_timeToSpawn);
+        StartCoroutine(SpawnPortal());
+    }
+
+    public void activatePortal(){
         StartCoroutine(SpawnPortal());
     }
 
