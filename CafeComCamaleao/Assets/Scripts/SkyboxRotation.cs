@@ -14,7 +14,7 @@ public class SkyboxRotation : MonoBehaviour
     void Update()
     {
 
-        Vector3 rotationToAdd = new Vector3(0, 0.01f, 0);
+        Vector3 rotationToAdd = new Vector3(0, 0.025f, 0);
         transform.Rotate(rotationToAdd);
         
     }

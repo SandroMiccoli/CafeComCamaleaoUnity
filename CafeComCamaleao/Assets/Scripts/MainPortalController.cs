@@ -27,6 +27,7 @@ using UnityEngine.Video;
 public class MainPortalController : MonoBehaviour
 {
 
+    public Material _previewMaterial,_videoMaterial;
     public float _timeToSpawn = 5.0f;
     public Vector3 _initialScale = new Vector3(18f,18f,18f);
     public GameObject _mainPortal;
@@ -170,6 +171,7 @@ public class MainPortalController : MonoBehaviour
     /// </summary>
     public IEnumerator SpawnPortal()
     {
+        gameObject.GetComponent<MeshRenderer>().material = _previewMaterial;
         _portalParticle.SetActive(true);
         float timeElapsed = 0;
         float lerpDuration = 3; 
@@ -214,6 +216,8 @@ public class MainPortalController : MonoBehaviour
         if(_mainPortal!=null){
             _mainPortal.GetComponent<VideoPlayer>().Pause();
         }
+
+        gameObject.GetComponent<MeshRenderer>().material = _videoMaterial;
 
         // START THIS PORTAL VIDEO
         _myVideoPlayer.Play();
@@ -286,7 +290,7 @@ public class MainPortalController : MonoBehaviour
             _portalParticleSystemEmission.enabled = true;
             _portalParticleSystemEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0.0f, emissionRate);
             emissionRate+=emissionRateInc;
-            transform.localScale += new Vector3(-0.005f,-0.005f,-0.005f);
+            transform.localScale += new Vector3(0.01f,0.01f,0.01f);
              
             // or for a funky light heavy effect:
             // _portalParticleSystemEmission.rateOverTime = Mathf.Lerp(particleEmissionMin, particleEmissionMax, startOfEmission/ emissionLength);
