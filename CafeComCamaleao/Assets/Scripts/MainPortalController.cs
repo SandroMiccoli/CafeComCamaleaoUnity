@@ -30,6 +30,7 @@ public class MainPortalController : MonoBehaviour
     public float _timeToSpawn = 5.0f;
     public Vector3 _initialScale = new Vector3(18f,18f,18f);
     public GameObject _mainPortal;
+    public bool _isMainPortal=false;
     public bool _autoStart=false;
     public bool _selfDestroy=false;
 
@@ -76,7 +77,7 @@ public class MainPortalController : MonoBehaviour
         
         _myVideoPlayer.url = Path.Combine(Application.streamingAssetsPath, _videoFileName);
         _myVideoPlayer.prepareCompleted += VideoPrepared;
-        _myVideoPlayer.Prepare();
+        // _myVideoPlayer.Prepare();
         _myVideoPlayer.loopPointReached += EndReached;
 
         transform.localScale = new Vector3(0f,0f,0f);
@@ -97,10 +98,19 @@ public class MainPortalController : MonoBehaviour
     public void Update(){
         // slowly takes from scale, if 0 then destroy portal
         if(_spawned && !_open && _selfDestroy){
-            transform.localScale -= new Vector3(-0.0075f,-0.0075f,-0.0075f);
-            if(transform.localScale.x>0){
+            transform.localScale -= new Vector3(0.0075f,0.0075f,0.0075f);
+            if(transform.localScale.x<0){
                 Destroy(gameObject);
             }
+        }
+
+        // if(!_myVideoPlayer.isPrepared){
+        //     _myVideoPlayer.Prepare();
+        // }
+
+
+        if(!_isMainPortal && _open && !_myVideoPlayer.isPlaying){
+            _myVideoPlayer.Play();
         }
     }
 
@@ -110,8 +120,13 @@ public class MainPortalController : MonoBehaviour
     }
 
     void VideoPrepared(UnityEngine.Video.VideoPlayer vp) {
-        vp.Play();
-        vp.Pause();
+        print("Video prepared: "+_videoFileName);
+        _myVideoPlayer.Play();
+        _myVideoPlayer.Pause();
+    }
+
+    public void PrepareVideo(){
+        _myVideoPlayer.Prepare();
     }
 
 
@@ -126,7 +141,6 @@ public class MainPortalController : MonoBehaviour
     {
         SetFocusedPortal(true);
         _portalSoundFX.GetComponent<AudioSource>().Play(0);
-        
     }
 
     /// <summary>
@@ -177,7 +191,7 @@ public class MainPortalController : MonoBehaviour
     ///
     private void SetFocusedPortal(bool gazedAt)
     {
-        if(gazedAt){
+        if(gazedAt && _cr_portalFxClose!=null){
             StopCoroutine(_cr_portalFxClose);
             StartCoroutine(_cr_portalFxOpen);
         
@@ -196,10 +210,6 @@ public class MainPortalController : MonoBehaviour
     /// </summary>
     private IEnumerator PortalOpenLerp()
     {
-        GameObject tit = GameObject.Find("Título");
-        if (tit)
-            tit.SetActive(false);
-
         // PAUSE MAIN VIDEO
         if(_mainPortal!=null){
             _mainPortal.GetComponent<VideoPlayer>().Pause();
@@ -241,7 +251,7 @@ public class MainPortalController : MonoBehaviour
         
         // LERPS SCALE
         float timeElapsed = 0;
-        float lerpDuration = 1; 
+        float lerpDuration = 2; 
         Vector3 scaleToLerp = _maxScale;
         while (timeElapsed < lerpDuration)
         {
