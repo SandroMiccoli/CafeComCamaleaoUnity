@@ -24,17 +24,26 @@ public class TutorialPortalController : MonoBehaviour
 {
     private GameObject _portalFX;
     private GameObject _portalSoundFX;
+    private GameObject _portalHoverSoundFX;
 
     private GameObject _tutorialManager;
 
     public Material[] _randomMaterials;
 
+    private IEnumerator _cr_portalFxOpen, _cr_portalFxClose;
+
+    private float _portalDissolveMin=-0.72f;
+    private float _portalDissolveMax=3f;
+
     public void Start()
     {
         _portalFX = this.gameObject.transform.GetChild(0).gameObject;
         _portalSoundFX = this.gameObject.transform.GetChild(1).gameObject;
+        _portalHoverSoundFX = this.gameObject.transform.GetChild(4).gameObject;
 
         _tutorialManager = gameObject.transform.parent.gameObject;
+
+        _cr_portalFxClose = PortalFXCloseLerp();
 
         gameObject.GetComponent<Renderer>().material = _randomMaterials[Random.Range(0, _randomMaterials.Length)];
 
@@ -48,12 +57,24 @@ public class TutorialPortalController : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        _portalSoundFX.GetComponent<AudioSource>().Play(0);
-        StartCoroutine(PortalCloseLerp());
+        SetFocusedPortal(true);
+        _portalHoverSoundFX.GetComponent<AudioSource>().Play();
     }
 
     public void OnPointerExit()
     {
+        SetFocusedPortal(false);
+        _portalHoverSoundFX.GetComponent<AudioSource>().Pause();
+    }
+
+    private void SetFocusedPortal(bool gazedAt)
+    {
+        if(gazedAt && _cr_portalFxClose!=null){
+            StartCoroutine(_cr_portalFxClose);
+        }
+        else{
+            StopCoroutine(_cr_portalFxClose);
+        }
     }
 
     public IEnumerator SpawnPortal()
@@ -82,6 +103,7 @@ public class TutorialPortalController : MonoBehaviour
 
     private IEnumerator PortalCloseLerp()
     {
+        _portalSoundFX.GetComponent<AudioSource>().Play(0);
 
         // LERPS SCALE
         float timeElapsed = 0;
@@ -98,6 +120,24 @@ public class TutorialPortalController : MonoBehaviour
         _tutorialManager.GetComponent<TutorialManager>().PortalDestroyed();
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator PortalFXCloseLerp()
+    {
+        float timeElapsed = 0;
+        float lerpDuration = 1; 
+        float valueToLerp;
+        while (timeElapsed < lerpDuration)
+        {
+            valueToLerp = Mathf.Lerp(_portalDissolveMax, _portalDissolveMin, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+            _portalFX.GetComponent<Renderer>().material.SetFloat("_DissolveAmount",valueToLerp);
+            yield return null;
+        }
+        valueToLerp = _portalDissolveMin;
+        _portalFX.GetComponent<Renderer>().material.SetFloat("_DissolveAmount",valueToLerp);
+
+        StartCoroutine(PortalCloseLerp());
     }
 
 }

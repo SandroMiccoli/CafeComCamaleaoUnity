@@ -7,6 +7,7 @@ public class PortalActivator : MonoBehaviour
 {
     private VideoPlayer _myVideoPlayer;
     public GameObject _titulo;
+    public GameObject _credits;
 
    [System.Serializable]
    public class PortalTimeEntry
@@ -23,6 +24,8 @@ public class PortalActivator : MonoBehaviour
     void Start()
     {
         _myVideoPlayer = GetComponent<VideoPlayer>();
+
+        _myVideoPlayer.loopPointReached += EndReached;
     }
 
     void Update()
@@ -43,8 +46,10 @@ public class PortalActivator : MonoBehaviour
                 }
             }
         }
-        else{
-            _titulo.SetActive(true);
-        }
+    }
+
+    void EndReached(UnityEngine.Video.VideoPlayer vp)
+    {
+        _credits.SetActive(true);
     }
 }
