@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_TutorialPortal
+  m_Name: Shader Graphs_TutorialPortal Orange
   m_Shader: {fileID: -6465566751694194690, guid: 51f7e5bcfed3b9a4ebe6a5772c97e8fa,
     type: 3}
   m_ValidKeywords: []
@@ -54,14 +54,14 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _DissolveAmount: 0.15
+    - _DissolveAmount: -0.9
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 3.78
-    - _Speed: 0.2
-    - _TwirlStrength: 14.05
+    - _Scale: 4.29
+    - _Speed: 0.1
+    - _TwirlStrength: 14.51
     m_Colors:
-    - _Color: {r: 2, g: 1.6627451, b: 0, a: 1}
+    - _Color: {r: 0.06666667, g: 0.005882353, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6618243170454695666
 MonoBehaviour:
