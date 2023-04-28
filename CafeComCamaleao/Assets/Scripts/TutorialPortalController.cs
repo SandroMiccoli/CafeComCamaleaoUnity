@@ -33,7 +33,7 @@ public class TutorialPortalController : MonoBehaviour
     private IEnumerator _cr_portalFxOpen, _cr_portalFxClose;
 
     private float _portalDissolveMin=-0.72f;
-    private float _portalDissolveMax=3f;
+    private float _portalDissolveMax=1f;
 
     public void Start()
     {
@@ -51,7 +51,7 @@ public class TutorialPortalController : MonoBehaviour
     }
 
     public void Update(){
-        Vector3 rotationToAdd = new Vector3(0, 0.1f, 0);
+        Vector3 rotationToAdd = new Vector3(0, 0.05f, 0);
         transform.Rotate(rotationToAdd);
     }
 
@@ -103,11 +103,12 @@ public class TutorialPortalController : MonoBehaviour
 
     private IEnumerator PortalCloseLerp()
     {
+
         _portalSoundFX.GetComponent<AudioSource>().Play(0);
 
         // LERPS SCALE
         float timeElapsed = 0;
-        float lerpDuration = 1; 
+        float lerpDuration = 0.2f; 
         Vector3 scaleToLerp = new Vector3(0f,0f,0f);
         while (timeElapsed < lerpDuration)
         {

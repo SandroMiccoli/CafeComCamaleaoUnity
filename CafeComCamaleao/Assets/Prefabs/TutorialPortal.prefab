@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803398571349878964}
   serializedVersion: 8
-  lengthInSec: 5.02
+  lengthInSec: 8
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -1702,7 +1702,7 @@ ParticleSystem:
     orbitalY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.32
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1967,7 +1967,7 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.22
+      scalar: 20
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2188,7 +2188,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3.36
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2344,7 +2344,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
@@ -2684,7 +2684,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.55
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3809,7 +3809,7 @@ ParticleSystem:
     - serializedVersion: 3
       emitter: {fileID: 0}
       type: 2
-      properties: 0
+      properties: -1
       emitProbability: 1
   LightsModule:
     enabled: 0
@@ -3988,7 +3988,7 @@ ParticleSystem:
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
-    dieWithParticles: 1
+    dieWithParticles: 0
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
@@ -5112,7 +5112,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 30
+  m_Time: 45
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 20.20061
