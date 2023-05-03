@@ -5263,7 +5263,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -7079,6 +7079,7 @@ GameObject:
   - component: {fileID: 937175026}
   - component: {fileID: 937175029}
   - component: {fileID: 937175028}
+  - component: {fileID: 937175030}
   m_Layer: 0
   m_Name: OrangePortal
   m_TagString: Untagged
@@ -7151,6 +7152,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937175025}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &937175030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937175025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdf25f8799e8b24486a6cc77c610754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioObject: {fileID: 285711706}
 --- !u!1 &955127915
 GameObject:
   m_ObjectHideFlags: 0
