@@ -22,7 +22,7 @@ public class TutorialManager : MonoBehaviour
         _tituloParticle = _titulo.transform.GetChild(0).gameObject;
         _tituloParticleSystem = _tituloParticle.GetComponent<ParticleSystem>();
         _tituloSoundtrack= _titulo.transform.GetChild(1).gameObject;
-        createTutorialPortal();
+        // createTutorialPortal();
     }
 
     // Update is called once per frame

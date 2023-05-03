@@ -20,7 +20,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
-public class TutorialPortalController : MonoBehaviour
+public class PreTutorialPortalController : MonoBehaviour
 {
     private GameObject _portalFX;
     private GameObject _portalSoundFX;
@@ -34,6 +34,8 @@ public class TutorialPortalController : MonoBehaviour
 
     private float _portalDissolveMin=-0.72f;
     private float _portalDissolveMax=1f;
+
+    public Vector3 _initialPosition;
 
     public void Start()
     {
@@ -51,8 +53,8 @@ public class TutorialPortalController : MonoBehaviour
     }
 
     public void Update(){
-        Vector3 rotationToAdd = new Vector3(0, 0.05f, 0);
-        transform.Rotate(rotationToAdd);
+        // Vector3 rotationToAdd = new Vector3(0, 0.05f, 0);
+        // transform.Rotate(rotationToAdd);
     }
 
     public void OnPointerEnter()
@@ -79,27 +81,32 @@ public class TutorialPortalController : MonoBehaviour
 
     public IEnumerator SpawnPortal()
     {
-        float timeElapsed = 0;
-        float lerpDuration = 3f; 
-        Vector3 scaleToLerp = new Vector3(0f,0f,0f);
-        Vector3 positionToLerp = new Vector3(0f,0f,0f);
 
-        Vector3 finalPosition = new Vector3(Random.Range(-150f,150f),Random.Range(-150f,150f),Random.Range(-150f,150f));
-        while(Vector3.Distance(finalPosition,new Vector3(0f,0f,0f))<50f)
-            finalPosition = new Vector3(Random.Range(-150f,150f),Random.Range(-150f,150f),Random.Range(-150f,150f));
-
-        while (timeElapsed < lerpDuration)
-        {
-            positionToLerp = Vector3.Lerp(transform.position, finalPosition, timeElapsed / lerpDuration);
-            scaleToLerp = Vector3.Lerp(new Vector3(0f,0f,0f), new Vector3(30f,30f,30f), timeElapsed / lerpDuration);
-            timeElapsed += Time.deltaTime;
-            transform.position = positionToLerp;
-            transform.localScale = scaleToLerp;
-            yield return null;
+        if(_initialPosition==null){
+            float timeElapsed = 0;
+            float lerpDuration = 3f; 
+            Vector3 scaleToLerp = new Vector3(0f,0f,0f);
+            Vector3 positionToLerp = new Vector3(0f,0f,0f);
+    
+            Vector3 finalPosition = new Vector3(Random.Range(-150f,150f),Random.Range(-150f,150f),Random.Range(-150f,150f));
+            while(Vector3.Distance(finalPosition,new Vector3(0f,0f,0f))<50f)
+                finalPosition = new Vector3(Random.Range(-150f,150f),Random.Range(-150f,150f),Random.Range(-150f,150f));
+    
+            while (timeElapsed < lerpDuration)
+            {
+                positionToLerp = Vector3.Lerp(transform.position, finalPosition, timeElapsed / lerpDuration);
+                scaleToLerp = Vector3.Lerp(new Vector3(0f,0f,0f), new Vector3(30f,30f,30f), timeElapsed / lerpDuration);
+                timeElapsed += Time.deltaTime;
+                transform.position = positionToLerp;
+                transform.localScale = scaleToLerp;
+                yield return null;
+            }
+            transform.localScale = new Vector3(30f,30f,30f);
+            transform.position = finalPosition;
         }
-        transform.localScale = new Vector3(30f,30f,30f);
-        transform.position = finalPosition;
-        
+        else {
+            transform.position = _initialPosition;
+        }
     }
 
     private IEnumerator PortalCloseLerp()
@@ -119,7 +126,7 @@ public class TutorialPortalController : MonoBehaviour
             yield return null;
         }
 
-        _tutorialManager.GetComponent<TutorialManager>().PortalDestroyed();
+        _tutorialManager.GetComponent<PreTutorialManager>().PortalDestroyed();
 
         Destroy(gameObject);
     }
@@ -127,7 +134,7 @@ public class TutorialPortalController : MonoBehaviour
     private IEnumerator PortalFXCloseLerp()
     {
         float timeElapsed = 0;
-        float lerpDuration = 1; 
+        float lerpDuration = 4f; 
         float valueToLerp;
         while (timeElapsed < lerpDuration)
         {
