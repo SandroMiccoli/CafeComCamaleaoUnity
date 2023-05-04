@@ -6707,7 +6707,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907292807}
-  m_LocalRotation: {x: 0, y: -0.9820741, z: 0, w: 0.1884956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6715,7 +6715,7 @@ Transform:
   - {fileID: 959308593}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -158.27, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &907292809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8060,9 +8060,9 @@ MonoBehaviour:
     GR\xC1FICO:\r\nDESTILERIA DE IDEIAS\r\n\r\nPRODU\xC7\xC3O EXECUTIVA:\r\nMARJORIE
     QUAST E ALEXANDRE ABRAH\xC3O (CHEI)\r\n\r\nASSESSORIA DE IMPRENSA:\r\nA DUPLA
     INFORMA\xC7\xC3O\r\n \r\nREALIZA\xC7\xC3O:\r\nCAMALE\xC3O GRUPO DE DAN\xC7A\r\n\r\nAPOIO:\r\nCAF\xC9
-    DA MATA (Lavras Novas)\r\nFRAU BONDAN (Belo Horizonte)\r\nN\xDACLEO ART\xCDSTICO\r\n\r\nAGRADECIMENTOS:\r\n
-    \r\nADV NIO LESSA\r\nALICE LESSA\r\nALISSON LESSA\r\nSr. ANTONIO ROQUE LESSA
-    e\r\nDONA LUCIA RIBEIRO DE CARVALHO LESSA\r\nAIRTON CRISTINA GUIMAR\xC3ES (Vaqueiro)\r\nCARLOS
+    DA MATA (Lavras Novas)\r\nFRAU BONDAN (Belo Horizonte)\r\nN\xDACLEO ART\xCDSTICO\r\n\r\nAGRADECIMENTOS:\r\n\r\nADV
+    NIO LESSA\r\nALICE LESSA\r\nALISSON LESSA\r\nSr. ANTONIO ROQUE LESSA e\r\nDONA
+    LUCIA RIBEIRO DE CARVALHO LESSA\r\nAIRTON CRISTINA GUIMAR\xC3ES (Vaqueiro)\r\nCARLOS
     CORREA MARINS\r\nJADER FERNANDO MARINS\r\nGILVAN DE OLIVEIRA\nSr. GONZAGA VICENTE
     GOMES e\r\nDONA LUCIENE APARECIDA DE SOUZA GOMES\r\nGUSTAVO GONZAGA GOMES\r\nL\xCDVIA
     C\xC1SSIA GOMES\r\nLUDMILA APARECIDA GOMES\r\nLUDMILA DE AVELAR SORAGI\r\nLUIZ
