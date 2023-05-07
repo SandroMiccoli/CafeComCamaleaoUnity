@@ -218,6 +218,8 @@ public class MainPortalController : MonoBehaviour
         }
 
         gameObject.GetComponent<MeshRenderer>().material = _videoMaterial;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
 
         // START THIS PORTAL VIDEO
         _myVideoPlayer.Play();
